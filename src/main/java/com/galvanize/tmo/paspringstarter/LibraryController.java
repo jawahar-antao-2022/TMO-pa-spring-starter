@@ -1,6 +1,7 @@
 package com.galvanize.tmo.paspringstarter;
 
 import com.galvanize.tmo.paspringstarter.models.Book;
+import com.galvanize.tmo.paspringstarter.models.Library;
 import com.galvanize.tmo.paspringstarter.services.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,9 @@ public class LibraryController {
 
     @GetMapping("/api/books")
     public ResponseEntity listBooks() {
-        return new ResponseEntity(bookService.listBooksByTitle(), HttpStatus.OK);
+        Library library = new Library();
+        library.setBooks(bookService.listBooksByTitle());
+        return new ResponseEntity(library, HttpStatus.OK);
     }
 
     @DeleteMapping("/api/books")
